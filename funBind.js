@@ -13,8 +13,8 @@ if (typeof Function.prototype.bind !== 'function') {
     let MFN = function() {}
     MFN.prototype = this.prototype
 
-    let bfn = function() {
-      self.apply(this instanceof MFN ? this : oThis || this, args)
+    let bfn = function(...args1) {
+      self.apply(this instanceof MFN ? this : oThis || this, [...args, ...args1])
     }
     bfn.prototype = new MFN
 

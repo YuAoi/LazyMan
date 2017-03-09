@@ -4,6 +4,7 @@ if (typeof Function.prototype.bind !== 'function') {
    *
    * @param {Object} oThis
    * @param {*} args
+   * @return {Function} bfn
   */
   Function.prototype.bind = function(oThis, ...args) {
     if (typeof this !== 'function') throw new TypeError('非函数调用')

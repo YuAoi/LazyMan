@@ -25,4 +25,4 @@ let getPrimesWithRange = ([start = 2, end = 32] = []) => {
 }
 
 console.log(getPrimesWithRange())
-console.log(getPrimesWithRange([0, 32]))
+console.log(getPrimesWithRange([900, 1000]))

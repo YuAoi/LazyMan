@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Element Size</title>
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .outer {
+      width: 300px;
+      height: 300px;
+      padding: 10px;
+      border: 10px solid #aaa;
+      background-color: #bbb;
+      overflow: auto;
+      /*margin: 10px;*/
+    }
+    .inner {
+      border: 10px solid #ccc;
+      background-color: #ddd;
+    }
+    p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="outer"><div class="inner">
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+      <p>0</p>
+    </div></div>
+  <script type="text/javascript">
+    let outer = document.querySelector('.outer')
+    let inner = document.querySelector('.inner')
+
+    
+
+    function show() {
+      console.log('offset', outer.offsetWidth, outer.offsetHeight, outer.offsetLeft, outer.offsetTop)
+      console.log('client', outer.clientWidth, outer.clientHeight)
+      console.log('scroll', outer.scrollWidth, outer.scrollHeight, outer.scrollLeft, outer.scrollTop)
+    }
+
+    function getBoundingClientRect (element) {
+      if (typeof arguments.callee.offset !== 'number') {
+        let scrollTop = document.documentElement.scrollTop
+        let temp = document.createElement('div')
+        temp.style.cssText = 'position: absolute; left: 0; top: 0;'
+        document.body.appendChild(temp)
+        arguments.callee.offset = -temp.getBoundingClientRect().top - scrollTop
+        temp = null
+      }
+
+      let rect = element.getBoundingClientRect()
+      let offset = arguments.callee.offset
+
+      return {
+        left: rect.left + offset,
+        right: rect.right + offset,
+        top: rect.top + offset,
+        bottom: rect.bottom + offset
+      }
+    }
+
+    /*
+      element.getBoundingClientRect()
+      返回元素在页面中相对于视口的位置（left, top, right, bottom, width, height）
+
+      element.clientWidth
+      返回元素宽度（padding + content)
+      element.clientHeight
+      返回元素高度（padding + content）
+
+      element.offsetWidth
+      返回元素偏移宽度（border + padding + content + scrollBar）
+      element.offsetHeight
+      返回元素偏移高度（border + padding + content + scrollBar）
+      element.offsetLeft
+      返回元素左外边框至offsetParent元素左内边框的像素距离
+      element.offsetTop
+      返回元素上外边框至offsetParent元素上内边框的像素距离
+
+      scrollWidth
+      返回元素在没有滚动条时的宽度
+      scrollHeight
+      返回元素在没有滚动条时的高度
+      scrollTop
+      返回元素
+    */
+  </script>
+</body>
+</html>

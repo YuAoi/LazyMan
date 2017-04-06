@@ -78,7 +78,7 @@ function compose (fns) {
  */
 compose.wrap = function (fns) {
   return function () {
-    compose(m)
+    compose(fns)
   }
 }
 // compose(m)

@@ -8,15 +8,24 @@ let p = [...new Array(10)].map((item, index) => {
     })
   }
 })
-
+/**
+ * 传递一个函数数组，使用async函数，顺序执行每一个函数（包含异步）
+ * @param {Array} fns
+ * @return {Promise}
+ */
 async function autoRun (fns) {
   for (let fn of fns) {
     await fn()
   }
 }
 
-autoRun(p).then(() => console.log('end'))
+// autoRun(p).then(() => console.log('end'))
 
+/**
+ * 传递一个函数数组，依赖promise.then方法顺序执行每一个函数（包含异步）
+ * @param {Array} fns
+ * @return {Promise}
+ */
 function run (fns) {
 
   return new Promise((resolve, reject) => {
@@ -44,28 +53,33 @@ let m = [...new Array(10)].map((item, index) => {
       setTimeout(() => {
         resolve(index)
         console.log(index, typeof next)
-        if (index < 6 ) next()
+        if (index < 16 ) next()
       }, 1000)
     })
   }
 })
-
+/**
+ * 传递一个函数数组，其中每一个函数调用next方法用于执行下个函数
+ * @param {Array} fns
+ */
 function compose (fns) {
-
-  return function () {
-    let current = 0
-    let len = fns.length
-    
-    fns[current](next(current + 1))
-  }
-
+  next(0)()
   function next (i) {
-
     return function () {
       let fn = fns[i]
       if (fn) fn(next(i + 1))
     }
   }
 }
-
-compose(m)()
+/**
+ * 传递一个函数数组，其中每一个函数调用next方法用于执行下个函数，返回一个启动函数
+ * @param {Array} fns
+ * @return {Function}
+ */
+compose.wrap = function (fns) {
+  return function () {
+    compose(m)
+  }
+}
+// compose(m)
+compose.wrap(m)()

@@ -32,7 +32,7 @@ class Node {
           current = current.right
           if (current === null) {
             parent.right = n
-            break
+            break
           }
         }
       }

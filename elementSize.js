@@ -1,19 +1,27 @@
 function getElementLeft (element) {
   let actualLeft = element.offsetLeft
-  let offsetParent = element.offsetParent
-  while (offsetParent !== null) {
-    actualLeft += offsetParent.offsetLeft
-    offsetParent = offsetParent.offsetParent
+  let current = element.offsetParent
+  while (current !== null) {
+    let parentBorderLeftWidth = document.defaultView.getComputedStyle(current, null).borderLeftWidth
+    actualLeft += current.offsetLeft
+    if (parentBorderLeftWidth) {
+      actualLeft += parseFloat(parentBorderLeftWidth)
+    }
+    current = current.offsetParent
   }
   return actualLeft
 }
 
 function getElementTop (element) {
   let actualTop = element.offsetTop
-  let offsetParent = element.offsetParent
-  while (offsetParent !== null) {
-    actualTop += offsetParent.offsetTop
-    offsetParent = offsetParent.offsetParent
+  let current = element.offsetParent
+  while (current !== null) {
+    let parentBorderTopWidth = document.defaultView.getComputedStyle(current, null).borderTopWidth
+    actualTop += current.offsetTop
+    if (parentBorderTopWidth) {
+      actualTop += parseFloat(parentBorderTopWidth)
+    }
+    current = current.offsetParent
   }
   return actualTop
 }

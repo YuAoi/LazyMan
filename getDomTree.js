@@ -47,3 +47,60 @@ function getDomTree (element, fn) {
 
   return virtualElement
 }
+/**
+ * 传入一个element，返回一个包含next和prev方法的对象，深度优先遍历
+ * @param {Element} element
+ * @return {Object}
+ */
+function getNodeIterator (element) {
+  let current = element
+  current.prev = null
+  let done = false
+  return {
+    next () {
+      let value = null
+      if (done) {
+        return {
+          value,
+          done
+        }
+      }
+      if (current.firstChild) {
+        value = current.firstChild
+      } else if (current.nextSibling) {
+        value = current.nextSibling
+      } else if (current.parentNode === element) {
+        value = null
+        done = true
+      } else if (current.parentNode.nextSibling) {
+        value = current.parentNode.nextSibling
+      } else {
+        value = null
+        done = true
+      }
+      if (value) current = Object.assign(value, {prev: current})
+      else current = {prev: current}
+      return {
+        value,
+        done
+      }
+    },
+    prev () {
+      if (done) {
+        return {
+          current,
+          done
+        }
+      }
+      if (current.prev) {
+        current = current.prev
+      } else {
+        done = true
+      }
+      return {
+        current,
+        done
+      }
+    }
+  }
+}

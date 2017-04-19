@@ -15,6 +15,32 @@ class BST {
     this.root = null
   }
 
+  // insert (data) {
+  //   let n = new Node(data, null, null)
+  //   if (this.root === null) {
+  //     this.root = n
+  //   } else {
+  //     let current = this.root
+  //     let parent
+  //     while (true) {
+  //       parent = current
+  //       if (data < current.data) {
+  //         current = current.left
+  //         if (current === null) {
+  //           parent.left = n
+  //           break
+  //         }
+  //       } else {
+  //         current = current.right
+  //         if (current === null) {
+  //           parent.right = n
+  //           break
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
   insert (data) {
     let n = new Node(data, null, null)
     if (this.root === null) {
@@ -24,6 +50,7 @@ class BST {
       let parent
       while (true) {
         parent = current
+
         if (data < current.data) {
           current = current.left
           if (current === null) {
@@ -37,6 +64,7 @@ class BST {
             break
           }
         }
+        
       }
     }
   }
@@ -114,12 +142,12 @@ nums.insert(52)
 nums.insert(2)
 // console.log('Inorder traversal: ')
 // nums.inOrder(nums.root)
-// console.log('Preorder traversal: ')
-// nums.preOrder(nums.root)
+console.log('Preorder traversal: ')
+nums.preOrder(nums.root)
 // console.log('PostOrder traversal: ')
 // nums.postOrder(nums.root)
 
-console.log('Min', nums.getMin())
-console.log('Max', nums.getMax())
-console.log('99', nums.find(99))
+// console.log('Min', nums.getMin())
+// console.log('Max', nums.getMax())
+// console.log('99', nums.find(99))
 // console.log(JSON.stringify(nums, null, 2))
